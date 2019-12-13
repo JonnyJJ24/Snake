@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+     <link href="Styles/style.css" rel="stylesheet"/>
+     <script src="Scripts/main.js"></script>
+  	 <script src="//console.re/connector.js" data-channel="43b1-4e3b-8fbc" id="consolerescript"></script>
+  	 <script type="text/javascript" src="HighScores.json"></script>
+    <title>Snake</title>
+</head>
+<body onload="onload()">
+<div id=CanvasDiv class=CanvasDiv>
+<canvas id=Canvas class=Canvas width=600px height=600px>
+</canvas>
+<div id=Scores>
+  <div id=ResetButtonBox class=IndivScoreBox>
+    <input type="button" id=ResetBtn value="Reset" onclick="started=false;DrawSnakeDead();">
+  </div>
+  <div id=ConfigButtonBox class=IndivScoreBox>
+    <input type="button" id=ConfigBtn value="Settings" onclick="ConfigMenu()">
+  </div>
+  <div id=LengthScoreBox class=IndivScoreBox>
+    <p>
+      Length:
+    </p>
+    <div id=LengthScore>0</div>
+  </div>
+  <div id=HighScoreBox class=IndivScoreBox>
+    <p>
+      High Score:
+    </p>
+    <p id=HighScore style="line-height:14px;">Getting High Score...</p>
+  </div>
+</div>
+<div id=startPopup>
+  <p style="text-align: center;">
+    Start Game?
+  </p>
+    <input type="button" value="Start" onclick="started = true;Play();document.getElementById('startPopup').style.visibility = 'hidden';">
+    <input type="button" value="Help?" style="font-size: 14px;" onclick="Help()">
+</div>
+<div id=ConfigPopup>
+  <p>Here You Can Configure Stuff...</p>
+  <input id=ConfigXitBtn type="button" value=X onclick=ConfigMenu()>
+  <div id=SettingsBoxL>
+    <input id=DarkModeBtn type="checkbox" onclick="DarkModeBtn()"><span>Dark Mode</span><br>
+    <div id=SpeedControllBox>
+      Snake Speed Controlls<br>
+      <input id=SpeedDropdown1 name=SpeedDropdown type="radio" onclick="SpeedConfig()">Slow<br>
+      <input id=SpeedDropdown2 name=SpeedDropdown type="radio" onclick="SpeedConfig()">Med<br>
+      <input id=SpeedDropdown3 name=SpeedDropdown checked type="radio" onclick="SpeedConfig()">Fast<br>
+      <input id=SpeedDropdown4 name=SpeedDropdown type="radio" onclick="SpeedConfig()">Demonic<br>
+    </div>
+    Food Length Multiplier<br>
+    <input class=FLMAdjmntImg type="image" value=Decrease onclick="SetFLM(0)" src="Images/Arrow_Left(Snake-Cfg).png">
+    <span><a id=FoodLengthMult></a>
+    <input class=FLMAdjmntImg type="image" value=increase onclick="SetFLM(1)" src="Images/Arrow_Right(Snake-Cfg).png"></span>
+  </div>
+  <div id=SettingsBoxR>
+    <input type="button" value="Reset High Score" onclick="ResetHS()">
+    <a id=AdvancedOptions>Advanced Options</a>
+    <input id=RecordBtn  class=AdvancedOptions type="button" value="Record" onclick="RecordBtn();">
+    <input id=ReplayInput class=AdvancedOptions type="file" value=RPInput><input id=LoadDemo class=AdvancedOptions type="button" value=Go onclick="LoadDemo();">
+    <p id=SettingsWarning></p>
+  </div>
+</div>
+<div id=HelpPopup>
+</div>
+<div id=NotSupportedPopup>
+  <p style="font-size: 26px;padding: 10px;padding-top: 30px;">
+    Your Browser Dosn't Support Canvases, This May Be Becuase
+    You Are Using An Out Dated Or Non Compatible Browser, Please Update Or Change Your
+    Browser To Play...
+  </p>
+</div>
+<div id=DevVisCon>
+</div>
+</div>
+</body>
+</html>
