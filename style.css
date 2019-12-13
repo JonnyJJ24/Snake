@@ -1,0 +1,210 @@
+body{
+
+}
+`.Canvas {
+  position: absolute;
+  /*padding-top: 50%;*/
+  /*width: 600px;
+  height: 600px;*/
+  /*border-right: 4px solid;*/
+  border: 2px solid;
+  border-color: black;
+  margin: auto;
+  background-color: darkgray;
+  /*z-index: 1;*/
+}
+#Scores {
+  width: 96px;
+  height: 604px;
+  position: absolute;
+  background-color: darkgray;
+  align-content: center;
+  text-align: center;
+  right: 0px;
+  border-color: black;
+  /*border-bottom: 2px solid;
+  border-top: 2px solid;*/
+}
+.CanvasDiv {
+  position: relative;
+  /*padding-top: 50%;*/
+  width: 700px;
+  height: 604px;
+  /*border-right: 4px solid;*/
+  border: 2px solid;
+  border-color: black;
+  margin: auto;
+  z-index: 1;
+  align-content: center;
+  justify-content: center;
+}
+#NotSupportedPopup {
+  visibility: hidden;
+  width: 400px;
+  height: 300px;
+  background-color: black;
+  text-align: center;
+  border-radius: 5px;
+  border: 4px solid;
+  position: absolute;
+  /*z-index: 2;*/
+  top: 150px;
+  left: 100px;
+  color: whitesmoke;
+}
+#startPopup {
+  visibility: visible;
+  width: 300px;
+  height: 100px;
+  background-color: black;
+  text-align: center;
+  border-radius: 5px;
+  border: 4px solid;
+  position: absolute;
+  /*z-index: 2;*/
+  top: 250px;
+  left: 150px;
+  color: whitesmoke;
+}
+#DevVisCon {
+  visibility: hidden;
+  position: fixed;
+  width: 320px;
+  height: 600px;
+  top: 0px;
+  /*bottom: 0px;*/
+  left: 0px;
+  border: 2px solid;
+  overflow-y: scroll;
+  line-height: 2px;
+}
+.IndivScoreBox {
+  position: absolute;
+  float: left;
+  width: 100%;
+  border-color: black;
+  border-bottom: 2px solid;
+  border-top: 2px solid;
+  /*left: 0px;
+  top: 0px;*/
+}
+#ResetButtonBox {
+  top: 0px;
+  height: 30px;
+}
+#ResetBtn{
+  background-color: red;
+  border-color: darkred;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+#ResetBtn:focus {
+  outline: none;
+}
+#ConfigButtonBox {
+  top: 32px;
+  height: 30px;
+}
+#ConfigBtn{
+  background-color: whitesmoke;
+  border-color: Black;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+#ConfigBtn:focus {
+  outline: none;
+}
+#ConfigPopup {
+  visibility: hidden;
+  width: 350px;
+  height: 250px;
+  background-color: black;
+  text-align: center;
+  border-radius: 5px;
+  border: 4px solid;
+  position: absolute;
+  /*z-index: 2;*/
+  top: 175px;
+  left: 125px;
+  color: whitesmoke;
+}
+#ConfigXitBtn {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  top:0px;
+  right:0px;
+  border-bottom:2px solid;
+  border-left:2px solid;
+  border-right-color: black;
+  border-top-color: black;
+  border-left-color: whitesmoke;
+  border-bottom-color: whitesmoke;
+  color: red;
+  background-color:black;
+  border-bottom-left-radius:15px;
+  font-size: 20px;
+}
+#ConfigXitBtn:focus{
+  outline: none;
+}
+#SettingsBoxL{
+  position: absolute;
+  align-content: left;
+  text-align: left;
+  padding-left: 5px;
+  width: 45%;
+  left: 0%;
+  /*border: 2px solid;*/
+}
+#SettingsBoxR{
+  position: absolute;
+  align-content: left;
+  text-align: left;
+  padding-left: 5px;
+  width: 45%;
+  left: 50%;
+  /*border: 2px solid;*/
+}
+#SpeedControllBox {
+  border: 2px solid;
+  border-radius: 3px;
+}
+#FoodLengthMult{
+  width: auto;
+  text-align: center;
+  font-size:25px;
+}
+#LengthScoreBox {
+  height: 60px;
+  line-height: 8px;
+  top: 64px
+}
+#HighScoreBox {
+  height: 70px;
+  line-height: 8px;
+  top: 126px;
+}
+.FLMAdjmntImg {
+  width: 20px;
+}
+.FLMAdjmntImg:focus {
+  outline: none;
+}
+#SettingsWarning{
+  position:absolute
+  text-align:center;
+  top:20%
+}
+.AdvancedOptions {
+  position:relative;
+  height: 20px;
+  visibility: ;
+}
+
