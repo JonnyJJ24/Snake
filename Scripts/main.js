@@ -601,39 +601,7 @@ function AdvancedOptions(){
   /*ATDL(devMode)
   ATDL(document.getElementsByClassName('AdvancedOptions').style.height)*/
 }
-/*
-function ReplayFileEnc(FTE){
-  for (var i=0;i<2;i++){
-  FTE = FTE.replace(/1/gi,"_ak2l0uwq")
-  FTE = FTE.replace(/2/gi,"_pquhbijhg")
-  FTE = FTE.replace(/3/gi,"_uig123")
-  FTE = FTE.replace(/4/gi,"_hqjlv18ghb")
-  FTE = FTE.replace(/5/gi,"_j1986f8bx")
-  FTE = FTE.replace(/6/gi,"_8907gyvb")
-  FTE = FTE.replace(/7/gi,"_lkjhl")
-  FTE = FTE.replace(/8/gi,"_009vYA89bq")
-  FTE = FTE.replace(/9/gi,"_9p17f8ovc")
-  FTE = FTE.replace(/0/gi,"_iuoqihbh12")
-  FTE = FTE.replace(/,/gi,"_7fc8oywfyl")
-  }
-  return FTE
-}
-function ReplayFileDec(FTD){
-  for (var i=0;i<10;i++){
-  FTD = FTD.replace(/_ak2l0uwq/gi,"1")
-  FTD = FTD.replace(/_pquhbijhg/gi,"2")
-  FTD = FTD.replace(/_uig123/gi,"3")
-  FTD = FTD.replace(/_hqjlv18ghb/gi,"4")
-  FTD = FTD.replace(/_j1986f8bx/gi,"5")
-  FTD = FTD.replace(/_8907gyvb/gi,"6")
-  FTD = FTD.replace(/_lkjhl/gi,"7")
-  FTD = FTD.replace(/_009vYA89bq/gi,"8")
-  FTD = FTD.replace(/_9p17f8ovc/gi,"9")
-  FTD = FTD.replace(/_iuoqihbh12/gi,"0")
-  FTD = FTD.replace(/_7fc8oywfyl/gi,",")
-  }
-  return FTD
-}*/
+
 function Help(){
   alert("Not Finished Yet, \nIf Game Is Too Fast, Go To Settings");
 }
