@@ -601,6 +601,7 @@ function AdvancedOptions(){
   /*ATDL(devMode)
   ATDL(document.getElementsByClassName('AdvancedOptions').style.height)*/
 }
+/*
 function ReplayFileEnc(FTE){
   for (var i=0;i<2;i++){
   FTE = FTE.replace(/1/gi,"_ak2l0uwq")
@@ -632,7 +633,7 @@ function ReplayFileDec(FTD){
   FTD = FTD.replace(/_7fc8oywfyl/gi,",")
   }
   return FTD
-}
+}*/
 function Help(){
   alert("Not Finished Yet, \nIf Game Is Too Fast, Go To Settings");
 }
