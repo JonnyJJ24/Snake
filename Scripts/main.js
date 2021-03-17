@@ -329,7 +329,7 @@ function RandFood(){
       done=true;
     }
   }
-  
+
   ATDL("Food Is Located At: "+SnakeData.Food[0]+", "+SnakeData.Food[1])
   
 }
@@ -338,7 +338,7 @@ function foodNotInSnake(x, y){
     return false;
   }
   for (var i=0; i<SnakeData.Length; i++){
-    if (SnakeData.Length[i*2]==x && SnakeData.Head[i*2+1]==y){
+    if (SnakeData.Snake[i*2]==x && SnakeData.Snake[i*2+1]==y){
       return false;
     }
   }
