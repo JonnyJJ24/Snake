@@ -337,7 +337,7 @@ function foodNotInSnake(x, y){
   if (SnakeData.Head[0]==x && SnakeData.Head[1]==y){
     return false;
   }
-  for (var i=0; i<SnakeData.Length; i++){
+  for (var i=0; i<SnakeData.Snake/2; i++){
     if (SnakeData.Snake[i*2]==x && SnakeData.Snake[i*2+1]==y){
       return false;
     }
@@ -392,28 +392,21 @@ function CheckKeyPressed(event){
   //ATDL(event.key);
   if (started == true){
   if (KeyPressMeM != event.key && AntiSpamKeyMem != event.key){
-    if (event.key == "ArrowUp" && SnakeData.Direction != 3){
+    if (event.key == "ArrowUp" && SnakeData.Direction != 3 || event.key == "w" && SnakeData.Direction != 3){
       ATDL("ArrowUp");
       SnakeData.Direction = 1;
-    }else if (event.key == "ArrowRight" && SnakeData.Direction != 4){
+    }else if (event.key == "ArrowRight" && SnakeData.Direction != 4 || event.key == "d" && SnakeData.Direction != 4){
       ATDL("ArrowRight");
       SnakeData.Direction = 2;
-    }else if (event.key == "ArrowDown" && SnakeData.Direction != 1){
+    }else if (event.key == "ArrowDown" && SnakeData.Direction != 1 || event.key == "s" && SnakeData.Direction != 1){
       ATDL("ArrowDown");
       SnakeData.Direction = 3;
-    }else if (event.key == "ArrowLeft" && SnakeData.Direction != 2){
+    }else if (event.key == "ArrowLeft" && SnakeData.Direction != 2 || event.key == "a" && SnakeData.Direction != 2){
       ATDL("ArrowLeft");
       SnakeData.Direction = 4;
     }
     event.preventDefault()
     AntiSpamKeyMem = event.key
-    //Dev Replay Capture
-    /*if (Config.Record){
-      Config.Replay[Config.Replay.length] = SnakeData.Direction;
-      Config.Replay[Config.Replay.length] = ReplayTimer;
-      Config.Replay[Config.Replay.length] = SnakeData.Food[0];
-      Config.Replay[Config.Replay.length] = SnakeData.Food[1];
-    }*/
   }
 }
 }
