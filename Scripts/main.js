@@ -27,7 +27,7 @@ var SnakeData = {
   //Starting Positon
   StartingPos: [3,3],
   //The Head
-  Head: [],
+  Head: [-1,-1],
   //The Tail
   Snake: [-1,-1],
   //Food Location
@@ -316,41 +316,35 @@ function RandFood(){
   }
   var max = 18;
   var min = 1;
-  var randLocValue = Math.floor(Math.random()*(max-min))-min;
-  while (randLocValue < 1 || randLocValue > 18){
-        randLocValue = Math.floor(Math.random()*(max-min))-min;
-      }
-  SnakeData.Food[0] = randLocValue;
-  randLocValue = Math.floor(Math.random()*(max-min))-min;
-  while (randLocValue < 1 || randLocValue > 18){
-    randLocValue = Math.floor(Math.random()*(max-min))-min;
+  var done=false;
+  while (!done){
+    var randLocValue = Math.floor(Math.random()*(max-min))-min;
+    var randLocValue2 = Math.floor(Math.random()*(max-min))-min;
+    while (randLocValue < 1 || randLocValue > 18){
+      randLocValue = Math.floor(Math.random()*(max-min))-min;
+    }
+    if (foodNotInSnake){
+      SnakeData.Food[0] = randLocValue;
+      SnakeData.Food[1] = randLocValue;
+      done=true;
+    }
   }
-  SnakeData.Food[1] = randLocValue;
-  FoodAintInSnake();
+  
   ATDL("Food Is Located At: "+SnakeData.Food[0]+", "+SnakeData.Food[1])
   
 }
-function FoodAintInSnake(){
-  var max = 18;
-  var min = 1;
-  var randLocValue
-  for (var i=SnakeData.Length;i>=0;i--){
-    if (SnakeData.Food[0] == SnakeData.Snake[i*2]||SnakeData.Food[1] == SnakeData.Snake[i*2+1]||SnakeData.Food[0]<1||SnakeData.Food[0]>18||SnakeData.Food[1]<1||SnakeData.Food[1]>18){
-      randLocValue = Math.floor(Math.random()*(max-min))-min;
-      if (randLocValue < 1 || randLocValue > 18){
-        randLocValue = Math.floor(Math.random()*(max-min))-min;
-      }
-      SnakeData.Food[0] = randLocValue;
-      randLocValue = Math.floor(Math.random()*(max-min))-min;
-      if (randLocValue < 1 || randLocValue > 18){
-        randLocValue = Math.floor(Math.random()*(max-min))-min;
-      }
-      SnakeData.Food[1] = randLocValue;
-      FoodAintInSnake();
-      return;
+function foodNotInSnake(x, y){
+  if (SnakeData.Head[0]==x && SnakeData.Head[1]==y){
+    return false;
+  }
+  for (var i=0; i<SnakeData.Length; i++){
+    if (SnakeData.Length[i*2]==x && SnakeData.Head[i*2+1]==y){
+      return false;
     }
   }
+  return true;
 }
+
 function DrawSnakeDead(){
   var canvas = document.getElementById('Canvas');
   var ctx = canvas.getContext('2d');
