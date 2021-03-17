@@ -27,7 +27,7 @@ var SnakeData = {
   //Starting Positon
   StartingPos: [3,3],
   //The Head
-  Head: [],
+  Head: [-1,-1],
   //The Tail
   Snake: [-1,-1],
   //Food Location
@@ -316,41 +316,35 @@ function RandFood(){
   }
   var max = 18;
   var min = 1;
-  var randLocValue = Math.floor(Math.random()*(max-min))-min;
-  while (randLocValue < 1 || randLocValue > 18){
-        randLocValue = Math.floor(Math.random()*(max-min))-min;
-      }
-  SnakeData.Food[0] = randLocValue;
-  randLocValue = Math.floor(Math.random()*(max-min))-min;
-  while (randLocValue < 1 || randLocValue > 18){
-    randLocValue = Math.floor(Math.random()*(max-min))-min;
+  var done=false;
+  while (!done){
+    var randLocValue = Math.floor(Math.random()*(max-min))-min;
+    var randLocValue2 = Math.floor(Math.random()*(max-min))-min;
+    while (randLocValue < 1 || randLocValue > 18){
+      randLocValue = Math.floor(Math.random()*(max-min))-min;
+    }
+    if (foodNotInSnake){
+      SnakeData.Food[0] = randLocValue;
+      SnakeData.Food[1] = randLocValue;
+      done=true;
+    }
   }
-  SnakeData.Food[1] = randLocValue;
-  FoodAintInSnake();
+  
   ATDL("Food Is Located At: "+SnakeData.Food[0]+", "+SnakeData.Food[1])
   
 }
-function FoodAintInSnake(){
-  var max = 18;
-  var min = 1;
-  var randLocValue
-  for (var i=SnakeData.Length;i>=0;i--){
-    if (SnakeData.Food[0] == SnakeData.Snake[i*2]||SnakeData.Food[1] == SnakeData.Snake[i*2+1]||SnakeData.Food[0]<1||SnakeData.Food[0]>18||SnakeData.Food[1]<1||SnakeData.Food[1]>18){
-      randLocValue = Math.floor(Math.random()*(max-min))-min;
-      if (randLocValue < 1 || randLocValue > 18){
-        randLocValue = Math.floor(Math.random()*(max-min))-min;
-      }
-      SnakeData.Food[0] = randLocValue;
-      randLocValue = Math.floor(Math.random()*(max-min))-min;
-      if (randLocValue < 1 || randLocValue > 18){
-        randLocValue = Math.floor(Math.random()*(max-min))-min;
-      }
-      SnakeData.Food[1] = randLocValue;
-      FoodAintInSnake();
-      return;
+function foodNotInSnake(x, y){
+  if (SnakeData.Head[0]==x && SnakeData.Head[1]==y){
+    return false;
+  }
+  for (var i=0; i<SnakeData.Length; i++){
+    if (SnakeData.Length[i*2]==x && SnakeData.Head[i*2+1]==y){
+      return false;
     }
   }
+  return true;
 }
+
 function DrawSnakeDead(){
   var canvas = document.getElementById('Canvas');
   var ctx = canvas.getContext('2d');
@@ -601,38 +595,7 @@ function AdvancedOptions(){
   /*ATDL(devMode)
   ATDL(document.getElementsByClassName('AdvancedOptions').style.height)*/
 }
-function ReplayFileEnc(FTE){
-  for (var i=0;i<2;i++){
-  FTE = FTE.replace(/1/gi,"_ak2l0uwq")
-  FTE = FTE.replace(/2/gi,"_pquhbijhg")
-  FTE = FTE.replace(/3/gi,"_uig123")
-  FTE = FTE.replace(/4/gi,"_hqjlv18ghb")
-  FTE = FTE.replace(/5/gi,"_j1986f8bx")
-  FTE = FTE.replace(/6/gi,"_8907gyvb")
-  FTE = FTE.replace(/7/gi,"_lkjhl")
-  FTE = FTE.replace(/8/gi,"_009vYA89bq")
-  FTE = FTE.replace(/9/gi,"_9p17f8ovc")
-  FTE = FTE.replace(/0/gi,"_iuoqihbh12")
-  FTE = FTE.replace(/,/gi,"_7fc8oywfyl")
-  }
-  return FTE
-}
-function ReplayFileDec(FTD){
-  for (var i=0;i<10;i++){
-  FTD = FTD.replace(/_ak2l0uwq/gi,"1")
-  FTD = FTD.replace(/_pquhbijhg/gi,"2")
-  FTD = FTD.replace(/_uig123/gi,"3")
-  FTD = FTD.replace(/_hqjlv18ghb/gi,"4")
-  FTD = FTD.replace(/_j1986f8bx/gi,"5")
-  FTD = FTD.replace(/_8907gyvb/gi,"6")
-  FTD = FTD.replace(/_lkjhl/gi,"7")
-  FTD = FTD.replace(/_009vYA89bq/gi,"8")
-  FTD = FTD.replace(/_9p17f8ovc/gi,"9")
-  FTD = FTD.replace(/_iuoqihbh12/gi,"0")
-  FTD = FTD.replace(/_7fc8oywfyl/gi,",")
-  }
-  return FTD
-}
+
 function Help(){
   alert("Not Finished Yet, \nIf Game Is Too Fast, Go To Settings");
 }
