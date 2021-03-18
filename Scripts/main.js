@@ -323,7 +323,7 @@ function RandFood(){
     while (randLocValue < 1 || randLocValue > 18){
       randLocValue = Math.floor(Math.random()*(max-min))-min;
     }
-    if (foodNotInSnake){
+    if (foodNotInSnake(randLocValue, randLocValue2)){
       SnakeData.Food[0] = randLocValue;
       SnakeData.Food[1] = randLocValue;
       done=true;
@@ -345,7 +345,7 @@ function foodNotInSnake(x, y){
   }
   */
   for (var i=SnakeData.Length;i>1;i--){
-    if (y==SnakeData.Snake[i*2] && x==SnakeData.Snake[i*2+1]){
+    if (x==SnakeData.Snake[i*2] && y==SnakeData.Snake[i*2+1]){
       return false;
     }
   }
