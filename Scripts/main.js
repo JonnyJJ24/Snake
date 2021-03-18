@@ -337,8 +337,15 @@ function foodNotInSnake(x, y){
   if (SnakeData.Head[0]==x && SnakeData.Head[1]==y){
     return false;
   }
+  /*
   for (var i=0; i<SnakeData.Snake/2; i++){
     if (SnakeData.Snake[i*2]==x && SnakeData.Snake[i*2+1]==y){
+      return false;
+    }
+  }
+  */
+  for (var i=SnakeData.Length;i>1;i--){
+    if (x==SnakeData.Snake[i*2] && y==SnakeData.Snake[i*2+1]){
       return false;
     }
   }
