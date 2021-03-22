@@ -3,7 +3,7 @@ var canvas;
 var ctx;
 var started = false;
 var KeyPressMeM;
-var LogToConsole = true;
+var LogToConsole = false;
 var DevLog = ""
 var CanDoHS = true;
 var devMode = false
@@ -94,6 +94,13 @@ function onload(){
   return canvas, ctx;
 }
 
+function resetBtn(){
+  started=false;
+  DrawSnakeDead();
+  for (var i;i<demoEvntTimeouts.length;i++){
+    clearTimeout(demoEvntTimeouts[i]);
+  }
+}
 
 function DrawInitial(ctx,canvas){
   var canvas = document.getElementById('Canvas');
@@ -320,15 +327,14 @@ function RandFood(){
   while (!done){
     var randLocValue = Math.floor(Math.random()*(max-min))-min;
     randLocValue = parseInt(randLocValue, 10);
+    randLocValue = foodInBounds(randLocValue);
     var randLocValue2 = Math.floor(Math.random()*(max-min))-min;
     randLocValue2 = parseInt(randLocValue2, 10);
-
-    while (randLocValue < 1 || randLocValue > 18){
-      randLocValue = Math.floor(Math.random()*(max-min))-min;
-    }
+    randLocValue2 = foodInBounds(randLocValue2);
+    
     if (foodNotInSnake(randLocValue, randLocValue2)){
       SnakeData.Food[0] = randLocValue;
-      SnakeData.Food[1] = randLocValue;
+      SnakeData.Food[1] = randLocValue2;
       done=true;
     }
   }
@@ -336,7 +342,18 @@ function RandFood(){
   ATDL("Food Is Located At: "+SnakeData.Food[0]+", "+SnakeData.Food[1])
   
 }
+function foodInBounds(a){
+  while (a<1){
+    a++;
+  }
+  while (a>18){
+    a--;
+  }
+  return a;
+}
+
 function foodNotInSnake(x, y){
+  //ATDL("x: "+x+"\ny: "+y);
   if (SnakeData.Head[0]==x && SnakeData.Head[1]==y){
     return false;
   }
@@ -383,9 +400,9 @@ function DrawSnakeDead(){
     };
     data = JSON.stringify(data)
     //alert(data)
-    data = ReplayFileEnc(data)
-    //alert(data)
-    download(data,ReplayName,".json")
+    //data = ReplayFileEnc(data)
+    //console.log(data)
+    download(data, ReplayName,".snkRply")
     }
   }
   if (Config.Dark == true){
@@ -526,11 +543,11 @@ function LoadDemo(){
     alert("Error reading file");
     return;
   }
+  //Timeout holder
+  var demoEvntTimeouts = [];
   //On Readable File Loaded
   reader.onload = function (evt) {
     FileText = evt.target.result;
-    //alert(FileText)
-    FileText = ReplayFileDec(FileText)
     //alert(FileText)
     var jsonData = JSON.parse(FileText);
     Config.Speed = jsonData.Replay[0];
@@ -541,7 +558,7 @@ function LoadDemo(){
     //ATDL(jsonData.Replay)
     SnakeData.Length = 1
     for (i=0;i<ForLength;i++){
-      setTimeout(function(){
+      demoEvntTimeouts[demoEvntTimeouts.length] = setTimeout(function(){
         var mult = demoforval*6+1
         SnakeData.Head[0] = jsonData.Replay[mult];
         mult = demoforval*6+2
@@ -566,6 +583,7 @@ function LoadDemo(){
   }
 }
 }
+/*
 function download(content, fileName, contentType) {
   var a = document.createElement("a");
   var file = new Blob([content], {type: contentType});
@@ -573,6 +591,22 @@ function download(content, fileName, contentType) {
   a.download = fileName;
   a.click()
 }
+*/
+function download(text, filename, type) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', (filename+type));
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+
+
 function RecordInfo(){
   if (Config.Record){
       Config.Replay[Config.Replay.length] = SnakeData.Head[0];
@@ -607,7 +641,7 @@ function ATDL(message){
   if (LogToConsole == true && message != MSSGARC){
     //DevLog = DevLog + message;
     //MSSGARC = message;
-    //alert(message);
+    console.log(message);
     /*if (console.re.log()){
       console.re.log(message);
     }*/
