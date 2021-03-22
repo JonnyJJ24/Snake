@@ -3,7 +3,6 @@
 <head>
      <link href="Styles/style.css" rel="stylesheet"/>
      <script src="Scripts/main.js"></script>
-  	 <script src="//console.re/connector.js" data-channel="43b1-4e3b-8fbc" id="consolerescript"></script>
   	 <script type="text/javascript" src="HighScores.json"></script>
     <title>Snake</title>
 </head>
@@ -13,7 +12,7 @@
 </canvas>
 <div id=Scores>
   <div id=ResetButtonBox class=IndivScoreBox>
-    <input type="button" id=ResetBtn value="Reset" onclick="started=false;DrawSnakeDead();">
+    <input type="button" id=ResetBtn value="Reset" onclick="resetBtn()">
   </div>
   <div id=ConfigButtonBox class=IndivScoreBox>
     <input type="button" id=ConfigBtn value="Settings" onclick="ConfigMenu()">
