@@ -29,7 +29,7 @@ var SnakeData = {
   //The Head
   Head: [-1,-1],
   //The Tail
-  Snake: [-1,-1],
+  Snake: [[-1,-1]],
   //Food Location
   Food: [-1,-1],
 };
@@ -85,7 +85,7 @@ function onload(){
     }
   }, 500);
   window.setInterval(function(){
-    var message = SnakeData.Length+1;
+    var message = SnakeData.Length;
     document.getElementById('LengthScore').innerHTML = message
   },200)
   
@@ -150,8 +150,8 @@ function GetHighScore(){
 }
 function CheckHighScore(){
   if (CanDoHS){
-    if (SnakeData.Length+1 > SnakeData.HighScore){
-      SnakeData.HighScore = SnakeData.Length+1
+    if (SnakeData.Length > SnakeData.HighScore){
+      SnakeData.HighScore = SnakeData.Length
       window.localStorage.setItem('HighScore',SnakeData.HighScore);
       document.getElementById('HighScore').innerHTML = SnakeData.HighScore;
     }
@@ -186,7 +186,7 @@ function Play(){
   KeyPressMeM = "";
   AntiSpamKeyMem = "";
   RandFood();
-  SnakeData.Snake = []
+  SnakeData.Snake = [[-1,-1]]
   if (Config.Record){
     //If True, Start Replay Timer
     //Config.Replay = [];
@@ -215,9 +215,9 @@ function Play(){
     //Snake Head Location Calculated
     CalcSnakeHeadLoc();
     //Body Parts
-    if (SnakeData.Snake.length/2 < SnakeData.Length){
-      for (var i=SnakeData.Snake.length/2;i==SnakeData.Length;i++){
-        SnakeData.Snake.concat([0,0]);
+    if (SnakeData.Snake.length < SnakeData.Length){
+      for (var i=SnakeData.Snake.length;i==SnakeData.Length;i++){
+        SnakeData.Snake[SnakeData.Snake.length] = [0,0]
         ATDL(SnakeData.Snake);
       }
     }
@@ -271,25 +271,22 @@ function DrawSnakeCurrentLocation(){
   //Body
   for (var i=SnakeData.Length;i >= 0;i--){
     if (i==0){
-      SnakeData.Snake[0] = SnakeData.Head[0];
-      SnakeData.Snake[1] = SnakeData.Head[1];
+      SnakeData.Snake[0][0] = SnakeData.Head[0];
+      SnakeData.Snake[0][1] = SnakeData.Head[1];
     }else{
-    var SnakeBDPTLocData = i*2;
-    SnakeData.Snake[SnakeBDPTLocData] = SnakeData.Snake[SnakeBDPTLocData-2];
-    
-    SnakeBDPTLocData = SnakeBDPTLocData+1;
-    SnakeData.Snake[SnakeBDPTLocData] = SnakeData.Snake[SnakeBDPTLocData-2];
+    //SnakeData.Snake[i][0] = SnakeData.Snake[i-1][0];
+    //SnakeData.Snake[i][1] = SnakeData.Snake[i-1][1];
+    SnakeData.Snake[i] = [SnakeData.Snake[i-1][0], SnakeData.Snake[i-1][1]];
     //ATDL("Data Assign Is Working... "+SnakeData.Snake[i*2-2]+", "+SnakeData.Snake[SnakeBDPTLocData-2]);
     }
   }
   CheckCollision()
-  for (var i=SnakeData.Length;i > 0;i--){
+  for (var i=SnakeData.Length-1;i > 0;i--){
     //Actual Drawing
-    var mult = i*2;
-    var colmult = 30*parseInt(SnakeData.Snake[mult]); 
-    mult = i*2+1;
-  	var rowmult = 30*parseInt(SnakeData.Snake[mult]);
-    //ATDL("BodyPart "+i+" is... "+SnakeData.Snake[i*2]+" "+SnakeData.Snake[mult])
+    var colmult = 30*parseInt(SnakeData.Snake[i][0]); 
+
+  	var rowmult = 30*parseInt(SnakeData.Snake[i][1]);
+    ATDL("BodyPart "+i+" is... "+SnakeData.Snake[i][0]+" "+SnakeData.Snake[i][1])
     ctx.fillRect(colmult,rowmult,29,29);
   }
   //Draw Food
@@ -309,8 +306,8 @@ function CheckCollision(){
     started = false;
   }
   //Snake Body Collision
-  for (var i=SnakeData.Length;i>1;i--){
-    if (SnakeData.Head[0]==SnakeData.Snake[i*2] && SnakeData.Head[1]==SnakeData.Snake[i*2+1]){
+  for (var i=SnakeData.Length-1;i>1;i--){
+    if (SnakeData.Head[0]==SnakeData.Snake[i][0] && SnakeData.Head[1]==SnakeData.Snake[i][1]){
       DrawSnakeDead();
       started = false;
     }
@@ -364,8 +361,8 @@ function foodNotInSnake(x, y){
     }
   }
   */
-  for (var i=SnakeData.Length;i>1;i--){
-    if (x==SnakeData.Snake[i*2] && y==SnakeData.Snake[i*2+1]){
+  for (var i=SnakeData.Length-1;i>1;i--){
+    if (x==SnakeData.Snake[i][0] && y==SnakeData.Snake[i][1]){
       return false;
     }
   }
@@ -378,10 +375,10 @@ function DrawSnakeDead(){
   ctx.fillStyle = 'red'
   for (var i=SnakeData.Length;i > 0;i--){
     //Actual Drawing
-    var mult = i*2;
-    var colmult = 30*parseInt(SnakeData.Snake[mult]); 
-    mult = i*2+1;
-  	var rowmult = 30*parseInt(SnakeData.Snake[mult]);
+    
+    var colmult = 30*parseInt(SnakeData.Snake[i][0]); 
+    
+  	var rowmult = 30*parseInt(SnakeData.Snake[i][1]);
     //ATDL("BodyPart "+i+" is... "+SnakeData.Snake[i*2]+" "+SnakeData.Snake[mult])
     ctx.fillRect(colmult,rowmult,29,29);
   }
